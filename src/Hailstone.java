@@ -27,12 +27,11 @@ public class Hailstone extends ConsoleProgram {
         if (current % 2 == 0) {
             newNum = current / 2;
             println(current + " is even, so I take half: " + newNum);
-            return newNum;
         } else {
             newNum = current * 3 + 1;
             println(current + " is odd, so I make 3n + 1: " + newNum);
-            return 3 * current + 1;
         }
+        return newNum;
     }
 }
 
