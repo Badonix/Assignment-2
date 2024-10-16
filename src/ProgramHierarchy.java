@@ -13,8 +13,8 @@ public class ProgramHierarchy extends GraphicsProgram {
     private static final String[] CHILD_TEXTS = {"GraphicsProgram", "ConsoleProgram", "DialogProgram"};
 
     public void run() {
-        double centerX = getWidth() / 2;
-        double centerY = getHeight() / 2;
+        double centerX = (double) getWidth() / 2;
+        double centerY = (double) getHeight() / 2;
 
         // Draw parent block
         double parentX = centerX - BLOCK_WIDTH / 2;

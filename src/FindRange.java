@@ -1,16 +1,25 @@
-/*
- * File: FindRange.java
- * Name: 
- * Section Leader: 
- * --------------------
- * This file is the starter file for the FindRange problem.
- */
-
-import acm.program.*;
+import acm.program.ConsoleProgram;
 
 public class FindRange extends ConsoleProgram {
-	public void run() {
-		/* You fill this in */
-	}
-}
+    public void run() {
+        println("This program finds the largest and smallest numbers");
+        int current = readInt("? ");
+        int min = current;
+        int max = current;
+        while (current != 0) {
+            current = readInt("? ");
+            min = findMin(current, min);
+            max = findMax(current, max);
+        }
+        println("smallest: " + min);
+        println("largest: " + max);
+    }
 
+    private int findMin(int a, int b) {
+        return a > b ? b : a;
+    }
+
+    private int findMax(int a, int b) {
+        return a > b ? a : b;
+    }
+}

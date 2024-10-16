@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/acm.jar!/" />
+          <root url="jar://$MODULE_DIR$/karel.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
