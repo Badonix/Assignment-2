@@ -3,7 +3,7 @@ import acm.program.GraphicsProgram;
 
 public class Pyramid extends GraphicsProgram {
     private static final int BRICK_WIDTH = 30;
-    private static final int BRICK_HEIGHT = 15;
+    private static final int BRICK_HEIGHT = 12;
     private static final int BRICKS_IN_BASE = 14;
 
     public void run() {
@@ -31,6 +31,7 @@ public class Pyramid extends GraphicsProgram {
         }
     }
 
+    // draw single brick
     public void drawBrick(int x, int y) {
         GRect brick = new GRect(BRICK_WIDTH, BRICK_HEIGHT);
         add(brick, x, y);

@@ -10,6 +10,8 @@ public class ProgramHierarchy extends GraphicsProgram {
     private static final double DISTANCE_BETWEEN_CLASSES_X = 50;
     private static final double DISTANCE_BETWEEN_CLASSES_Y = 150;
     private static final String PARENT_NODE_TEXT = "Program";
+
+    // (extension) Using array to dynamically render child nodes, can easily render 1, 2, 3 or any number of child nodes
     private static final String[] CHILD_TEXTS = {"GraphicsProgram", "ConsoleProgram", "DialogProgram"};
 
     public void run() {
@@ -27,6 +29,7 @@ public class ProgramHierarchy extends GraphicsProgram {
     }
 
     private void drawChildren(double parentX, double parentY, double childRowY) {
+        // Total width of child row
         double totalWidth = CHILD_TEXTS.length * BLOCK_WIDTH + (CHILD_TEXTS.length - 1) * DISTANCE_BETWEEN_CLASSES_X;
         double startX = (getWidth() - totalWidth) / 2;
 
