@@ -39,10 +39,6 @@ public class ProgramHierarchy extends GraphicsProgram {
         add(label);
     }
 
-    private void connectToParentNode(double x, double y, double parentX, double parentY) {
-        GLine line = new GLine(x, y, parentX, parentY);
-        add(line);
-    }
 
     private void drawFirstChild(double parentNodeX, double parentNodeY, double childRowY) {
         double firstChildX = parentNodeX - DISTANCE_BETWEEN_CLASSES_X - BLOCK_WIDTH;
@@ -59,5 +55,10 @@ public class ProgramHierarchy extends GraphicsProgram {
         double thirdChildX = parentNodeX + DISTANCE_BETWEEN_CLASSES_X + BLOCK_WIDTH;
         drawBlock(THIRD_CHILD_TEXT, thirdChildX, childRowY);
         connectToParentNode(thirdChildX + BLOCK_WIDTH / 2, childRowY, parentNodeX + BLOCK_WIDTH / 2, parentNodeY + BLOCK_HEIGHT);
+    }
+
+    private void connectToParentNode(double x, double y, double parentX, double parentY) {
+        GLine line = new GLine(x, y, parentX, parentY);
+        add(line);
     }
 }
