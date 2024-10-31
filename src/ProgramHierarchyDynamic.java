@@ -3,7 +3,7 @@ import acm.graphics.GLine;
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 
-public class ProgramHierarchyExtension extends GraphicsProgram {
+public class ProgramHierarchyDynamic extends GraphicsProgram {
 
     private static final double BLOCK_WIDTH = 200;
     private static final double BLOCK_HEIGHT = 70;
