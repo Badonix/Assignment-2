@@ -4,57 +4,60 @@ import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 
 public class ProgramHierarchy extends GraphicsProgram {
-
     private static final double BLOCK_WIDTH = 200;
     private static final double BLOCK_HEIGHT = 70;
     private static final double DISTANCE_BETWEEN_CLASSES_X = 50;
     private static final double DISTANCE_BETWEEN_CLASSES_Y = 150;
     private static final String PARENT_NODE_TEXT = "Program";
-
-    // (extension) Using array to dynamically render child nodes, can easily render 1, 2, 3 or any number of child nodes
-    private static final String[] CHILD_TEXTS = {"GraphicsProgram", "ConsoleProgram", "DialogProgram"};
+    private static final String FIRST_CHILD_TEXT = "GraphicsProgram";
+    private static final String SECOND_CHILD_TEXT = "ConsoleProgram";
+    private static final String THIRD_CHILD_TEXT = "DialogProgram";
 
     public void run() {
-        double centerX = (double) getWidth() / 2;
-        double centerY = (double) getHeight() / 2;
-
-        // Draw parent block
-        double parentX = centerX - BLOCK_WIDTH / 2;
-        double parentY = centerY - DISTANCE_BETWEEN_CLASSES_Y / 2;
-        drawBlock(PARENT_NODE_TEXT, parentX, parentY);
-
-        // Draw child blocks dynamically
+        double centerX = getWidth() / 2;
+        double centerY = getHeight() / 2;
+        // All second row has same Y coordinate
         double childRowY = centerY + DISTANCE_BETWEEN_CLASSES_Y / 2;
-        drawChildren(parentX, parentY, childRowY);
+        // Drawing parent node, we need X and Y of this for other blocks, so we do not create separate method for it
+        double parentNodeX = centerX - BLOCK_WIDTH / 2;
+        double parentNodeY = centerY - DISTANCE_BETWEEN_CLASSES_Y / 2;
+        drawBlock(PARENT_NODE_TEXT, parentNodeX, parentNodeY);
+        // All child coordinates are based on parent's coordinates
+        drawFirstChild(parentNodeX, parentNodeY, childRowY);
+        drawSecondChild(parentNodeX, parentNodeY, childRowY);
+        drawThirdChild(parentNodeX, parentNodeY, childRowY);
     }
 
-    private void drawChildren(double parentX, double parentY, double childRowY) {
-        // Total width of child row
-        double totalWidth = CHILD_TEXTS.length * BLOCK_WIDTH + (CHILD_TEXTS.length - 1) * DISTANCE_BETWEEN_CLASSES_X;
-        double startX = (getWidth() - totalWidth) / 2;
-
-        for (int i = 0; i < CHILD_TEXTS.length; i++) {
-            double childX = startX + i * (BLOCK_WIDTH + DISTANCE_BETWEEN_CLASSES_X);
-            drawBlock(CHILD_TEXTS[i], childX, childRowY);
-            connectToParentNode(childX + BLOCK_WIDTH / 2, childRowY, parentX + BLOCK_WIDTH / 2, parentY + BLOCK_HEIGHT);
-        }
-    }
-
-    private void drawBlock(String text, double x, double y) {
+    public void drawBlock(String text, double x, double y) {
         GRect block = new GRect(x, y, BLOCK_WIDTH, BLOCK_HEIGHT);
         GLabel label = new GLabel(text);
-
-        // Center the label inside the rectangle
+        // Center the label inside rectangle
         double labelX = x + (BLOCK_WIDTH - label.getWidth()) / 2;
-        double labelY = y + (BLOCK_HEIGHT + label.getAscent()) / 2;
+        double labelY = y + BLOCK_HEIGHT / 2;
         label.setLocation(labelX, labelY);
-
-        add(block);
+        add(block, x, y);
         add(label);
     }
 
     private void connectToParentNode(double x, double y, double parentX, double parentY) {
         GLine line = new GLine(x, y, parentX, parentY);
         add(line);
+    }
+
+    private void drawFirstChild(double parentNodeX, double parentNodeY, double childRowY) {
+        double firstChildX = parentNodeX - DISTANCE_BETWEEN_CLASSES_X - BLOCK_WIDTH;
+        drawBlock(FIRST_CHILD_TEXT, firstChildX, childRowY);
+        connectToParentNode(firstChildX + BLOCK_WIDTH / 2, childRowY, parentNodeX + BLOCK_WIDTH / 2, parentNodeY + BLOCK_HEIGHT);
+    }
+
+    private void drawSecondChild(double parentNodeX, double parentNodeY, double childRowY) {
+        drawBlock(SECOND_CHILD_TEXT, parentNodeX, childRowY);
+        connectToParentNode(parentNodeX + BLOCK_WIDTH / 2, childRowY, parentNodeX + BLOCK_WIDTH / 2, parentNodeY + BLOCK_HEIGHT);
+    }
+
+    private void drawThirdChild(double parentNodeX, double parentNodeY, double childRowY) {
+        double thirdChildX = parentNodeX + DISTANCE_BETWEEN_CLASSES_X + BLOCK_WIDTH;
+        drawBlock(THIRD_CHILD_TEXT, thirdChildX, childRowY);
+        connectToParentNode(thirdChildX + BLOCK_WIDTH / 2, childRowY, parentNodeX + BLOCK_WIDTH / 2, parentNodeY + BLOCK_HEIGHT);
     }
 }
